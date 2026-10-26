@@ -362,7 +362,7 @@
   .card:hover, .card.open{ border-color:rgba(211,186,127,.55); }
   .card::before{
     content:""; position:absolute; inset:0; z-index:1; background:#000; opacity:0;
-    transition:opacity .55s ease; pointer-events:none;
+    transition:opacity .8s var(--ease); pointer-events:none;
   }
   .card:hover::before, .card.open::before{ opacity:.5; }
   .card-body{
@@ -380,12 +380,24 @@
   }
   .card-cat{ font-size:12px; font-weight:700; letter-spacing:.26em; color:var(--gold); text-transform:uppercase; }
   .card-details{
-    max-height:0; opacity:0; transform:translateY(10px); overflow:hidden;
-    transition:max-height .6s var(--ease), opacity .5s ease, transform .5s var(--ease);
+    display:grid; grid-template-rows:0fr; opacity:0;
+    transition:grid-template-rows .85s cubic-bezier(.22,1,.36,1), opacity .5s ease;
+  }
+  .card-details-in{ overflow:hidden; min-height:0; }
+  .card-details-in > *{
+    opacity:0; transform:translateY(36px);
+    transition:opacity .35s ease, transform .45s var(--ease);
   }
   .card:hover .card-details, .card.open .card-details, .card:focus-within .card-details{
-    max-height:380px; opacity:1; transform:none;
+    grid-template-rows:1fr; opacity:1;
   }
+  .card:hover .card-details-in > *, .card.open .card-details-in > *, .card:focus-within .card-details-in > *{
+    opacity:1; transform:translateY(0);
+    transition:opacity .65s ease, transform .95s cubic-bezier(.22,1.32,.36,1);
+  }
+  .card:hover .card-details-in > *:nth-child(1), .card.open .card-details-in > *:nth-child(1), .card:focus-within .card-details-in > *:nth-child(1){ transition-delay:.07s; }
+  .card:hover .card-details-in > *:nth-child(2), .card.open .card-details-in > *:nth-child(2), .card:focus-within .card-details-in > *:nth-child(2){ transition-delay:.18s; }
+  .card:hover .card-details-in > *:nth-child(3), .card.open .card-details-in > *:nth-child(3), .card:focus-within .card-details-in > *:nth-child(3){ transition-delay:.29s; }
   .card-desc{ font-size:15px; line-height:1.7; color:var(--txt-dim); margin:20px 0 0; max-width:520px; }
   .card-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
   .card-link{
@@ -409,7 +421,7 @@
   .card-media img.shot{
     height:100%; max-height:460px; width:auto; max-width:46%; object-fit:contain;
     border-radius:10px; box-shadow:0 24px 50px -18px rgba(0,0,0,.65);
-    transition:transform .6s var(--ease), filter .55s ease;
+    transition:transform .9s cubic-bezier(.22,1,.36,1), filter .8s var(--ease);
   }
   .card-media img.shot:only-child{ max-width:72%; }
   .card:hover .card-media img.shot, .card.open .card-media img.shot{ transform:scale(1.045) rotate(-1deg); filter:brightness(.72); }
@@ -420,7 +432,7 @@
   .mock{
     width:min(430px,88%); background:var(--cream-2); border-radius:10px; overflow:hidden;
     box-shadow:0 24px 50px -18px rgba(0,0,0,.4); color:var(--ink);
-    transition:transform .6s var(--ease);
+    transition:transform .9s cubic-bezier(.22,1,.36,1);
   }
   .card:hover .mock, .card.open .mock{ transform:scale(1.04) rotate(-1deg); }
   .mock-bar{ display:flex; gap:6px; align-items:center; background:#ddd3ba; padding:9px 12px; }
@@ -708,11 +720,13 @@
         <h3 class="card-name">DeliveryFlow</h3>
         <div class="card-cat">Flutter App — Delivery Companion</div>
         <div class="card-details">
-          <p class="card-desc">A complete companion for delivery work: live GPS road tracking matched to real routes, shift schedules built from hour blocks, order management, and weekly salary reports with distance bonuses — built for real daily field work.</p>
-          <div class="card-tags">
-            <span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">GPS Tracking</span><span class="chip">Local Storage</span>
+          <div class="card-details-in">
+            <p class="card-desc">A complete companion for delivery work: live GPS road tracking matched to real routes, shift schedules built from hour blocks, order management, and weekly salary reports with distance bonuses — built for real daily field work.</p>
+            <div class="card-tags">
+              <span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">GPS Tracking</span><span class="chip">Local Storage</span>
+            </div>
+            <a class="card-link" href="https://github.com/mohamed5946/deliveryflow" target="_blank" rel="noopener">View on GitHub <span class="arr">↗</span></a>
           </div>
-          <a class="card-link" href="https://github.com/mohamed5946/deliveryflow" target="_blank" rel="noopener">View on GitHub <span class="arr">↗</span></a>
         </div>
         <div class="card-hint">Hover / tap to explore</div>
       </div>
@@ -728,11 +742,13 @@
         <h3 class="card-name">Study Assistant</h3>
         <div class="card-cat">Flutter App — Study Companion</div>
         <div class="card-details">
-          <p class="card-desc">A study companion built for Computer Science students: lecture schedules and a study planner, an AI chat that explains and debugs code, PDF reading with OCR for Arabic &amp; English, and AI-generated mind maps.</p>
-          <div class="card-tags">
-            <span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">AI Chat</span><span class="chip">OCR</span><span class="chip">Mind Maps</span>
+          <div class="card-details-in">
+            <p class="card-desc">A study companion built for Computer Science students: lecture schedules and a study planner, an AI chat that explains and debugs code, PDF reading with OCR for Arabic &amp; English, and AI-generated mind maps.</p>
+            <div class="card-tags">
+              <span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">AI Chat</span><span class="chip">OCR</span><span class="chip">Mind Maps</span>
+            </div>
+            <a class="card-link" href="https://github.com/mohamed5946/study-assistant" target="_blank" rel="noopener">View on GitHub <span class="arr">↗</span></a>
           </div>
-          <a class="card-link" href="https://github.com/mohamed5946/study-assistant" target="_blank" rel="noopener">View on GitHub <span class="arr">↗</span></a>
         </div>
         <div class="card-hint">Hover / tap to explore</div>
       </div>
@@ -749,11 +765,13 @@
         <h3 class="card-name">Portfolio Website</h3>
         <div class="card-cat">Web — This Very Site</div>
         <div class="card-details">
-          <p class="card-desc">This site itself — a creative developer portfolio with a 0–100% loading sequence, a hand-drawn welcome, magnetic buttons, and giant letters that ripple under your cursor. Fully responsive: touch replaces hover on mobile.</p>
-          <div class="card-tags">
-            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Motion</span>
+          <div class="card-details-in">
+            <p class="card-desc">This site itself — a creative developer portfolio with a 0–100% loading sequence, a hand-drawn welcome, magnetic buttons, and giant letters that ripple under your cursor. Fully responsive: touch replaces hover on mobile.</p>
+            <div class="card-tags">
+              <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Motion</span>
+            </div>
+            <a class="card-link" href="#top">Back to the top <span class="arr">↗</span></a>
           </div>
-          <a class="card-link" href="#top">Back to the top <span class="arr">↗</span></a>
         </div>
         <div class="card-hint">Hover / tap to explore</div>
       </div>
